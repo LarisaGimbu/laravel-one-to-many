@@ -50,6 +50,24 @@
         @enderror
 
       </div>
+      <div class="mb-3">
+        <label for="category_id" class="form-label">Categoria:</label>
+        <select 
+        name="category_id"
+        id="category_id"
+        class="form-control" 
+        aria-label="Default select example">
+          <option selected>Selezionare una categoria</option>
+          @foreach ($categories as $category)
+            <option 
+            @if ($category->id == old('category_id'))
+              selected
+            @endif
+            value=" {{$category->id}} ">{{$category->name}}</option>
+          @endforeach
+          
+        </select>
+      </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
       <button type="reset" class="btn btn-secondary">Reset</button>

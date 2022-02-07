@@ -3,6 +3,11 @@
 @section('content')
 <div class="container">
     <h1> {{$post->title}} </h1>
+    <h4>
+        @if ($post->category)
+            {{$post->category->name}}
+        @endif
+    </h4>
 
 
     <p> {{$post->content}} </p>

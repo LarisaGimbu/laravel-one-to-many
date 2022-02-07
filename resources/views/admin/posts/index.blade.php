@@ -10,6 +10,7 @@
           <th scope="col">ID</th>
           <th scope="col">Title</th>
           <th scope="col">Content</th>
+          <th scope="col">Categoria</th>
           <th scope="col">Slug</th>
           <th scope="col">Actions</th>
         </tr>
@@ -20,6 +21,13 @@
           <th scope="row"> {{$post->id}} </th>
           <td>{{$post->title}}</td>
           <td>{{$post->content}}</td>
+          <td>
+            @if ($post->category)
+              {{$post->category->name}}
+            @else
+              -
+            @endif
+          </td>
           <td> {{$post->slug}} </td>
           <td><a class="btn-warning p-2 rounded d-flex align-items-center" href=" {{route('admin.posts.show', $post)}} ">Show</a> </td>
           <td>
@@ -37,5 +45,20 @@
     </table>
 
     {{$posts->links()}}
+
+    <div>
+      @foreach ($categories as $category)
+        <h3> {{$category->name}} </h3>
+        <ul>
+          @forelse ($category->posts as $post_category)
+            <li>
+              <a href=" {{route('admin.posts.show', $post_category)}} "> {{$post_category->title}} </a>
+            </li>
+          @empty
+            <li>Nessun post presente</li>
+          @endforelse
+        </ul>
+      @endforeach
+    </div>
 </div>
 @endsection
